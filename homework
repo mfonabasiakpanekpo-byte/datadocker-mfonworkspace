@@ -1,0 +1,72 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPzGQQ7oaRlW4JYUB2qLlwx",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/mfonabasiakpanekpo-byte/datadocker-mfonworkspace/blob/main/homework\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "df = pd.read_parquet(\"yellow_tripdata_2023-01.parquet\")\n",
+        "df.shape\n",
+        "df.head()\n",
+        "df[\"duration\"] =df[\"tpep_dropoff_datetime\"] - df[\"tpep_pickup_datetime\"]\n",
+        "df[\"duration\"].head()\n",
+        "df['duration'] = df['duration'].dt.total_seconds()/60\n",
+        "df[\"duration\"].std()\n",
+        "df = df[(df['duration'] >=1) & (df['duration'] <=60)]\n",
+        "df.shape\n",
+        "3009173 / 3066766\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "zDg8Ng6-aoRl",
+        "outputId": "b39365a7-d831-44f2-8dad-874e2c78b280"
+      },
+      "execution_count": 30,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "0.9812202822125979"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 30
+        }
+      ]
+    }
+  ]
+}
